@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="rockpaperscissor" type="rockpaperscissor" name="rockpaperscissor" respawn="true" output="screen" />
+  <node pkg="rockpaperscissor" type="rockpaperscissor_node" name="rockpaperscissor" respawn="true" output="screen" />
 
   <node pkg="usb_cam" type="usb_cam_node" name="camera" output="screen">
     <param name="video_device" type="string" value="/dev/video0" />

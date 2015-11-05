@@ -12,6 +12,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/Image.h>
+
 
 using namespace cv;
 
@@ -27,8 +29,8 @@ private:
     //HAND GESTURE
     int result;
 
+    //sensor_msgs::CvBridge bridge_;
     cv_bridge::CvImagePtr bridge;
-    CvCapture *capture;
     IplImage *frame;
     CvMemStorage* storage;
     CvHaarClassifierCascade* cascade_paper;
@@ -39,7 +41,7 @@ private:
     const char* cascade_rock_name;
     const char* cascade_scissor_name;
 
-    IplImage* detectAndDraw(IplImage *img);
+    //IplImage* detectAndDraw(IplImage *img);
     //QImage getQImageFromIplImage(IplImage *frame);
 
     ros::Publisher resultPublisher;

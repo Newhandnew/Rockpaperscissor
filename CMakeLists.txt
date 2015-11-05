@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   image_transport
+  sensor_msgs
+
 )
 
 ## System dependencies are found with CMake's conventions
@@ -129,7 +131,7 @@ include_directories(
 # add_dependencies(rockpaperscissor ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(rockpaperscissor_node src/rockpaperscissor_node.cpp)
+add_executable(rockpaperscissor_node src/rockpaperscissor_node.cpp src/main.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
