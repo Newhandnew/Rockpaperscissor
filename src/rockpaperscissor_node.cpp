@@ -1,5 +1,6 @@
 #include "../include/rockpaperscissor_node.hpp"
 #include "ros/ros.h"
+#include <std_msgs/String.h>
 
 using namespace std;
 using namespace cv;
@@ -8,6 +9,7 @@ using namespace cv;
 rockpaperscissor_node::rockpaperscissor_node(int argc, char **argv) {
   ros::init(argc, argv, "rockpaperscissor");
   ros::NodeHandle n;
+  resultPublisher = n.advertise<std_msgs::String>("/rockpaperscissor_node/result", 10);
   imageSubscriber = n.subscribe("/camera/image_raw", 10, &rockpaperscissor_node::imageReceiveHandler, this);  ///usb_cam/image_raw"
   ROS_WARN("Rockpaperscissor_node started!");
   
@@ -58,6 +60,7 @@ void rockpaperscissor_node::imageReceiveHandler(const sensor_msgs::ImageConstPtr
   int i;
   int max_palm = 0, max_fist = 0, max_scissor = 0;
   int valueP =0, valueR = 0, valueS = 0;
+  char currentResult;
   const CvFont fontText=cvFont(4, 3);
   char outputText[10];
 
@@ -142,22 +145,35 @@ void rockpaperscissor_node::imageReceiveHandler(const sensor_msgs::ImageConstPtr
   if(valueR > 0 && valueR < 11000) {
       if(valueP > 0) {
           if (valueR > valueP)
-              result = 1;
+              currentResult = 1;
           else
-              result = 2;
+              currentResult = 2;
       }
       else
-          result = 1;
+          currentResult = 1;
   }
   else {
       if(valueP > 0)
-          result = 2;
-      else if(abs(max_scissor - 90000) < 25000)
-          result = 3;
+          currentResult = 2;
+      else if(abs(max_scissor - 90000) < 30000)
+          currentResult = 3;
       else
-          result = 0;
+          currentResult = 0;
   }
-  printf("%d\n", result );
+  // debounce process
+  if(lastResult == currentResult) {
+    result = currentResult;
+  }
+  else {
+    lastResult = currentResult;
+  }
+  // publish result
+  std_msgs::String msg;
+  char message[7];
+  sprintf(message, "%d", result);
+  msg.data = message;//ss.str();
+  resultPublisher.publish(msg);
+
 
  //  int width = cv_matrix.cols; 
  //  int height = cv_matrix.rows;

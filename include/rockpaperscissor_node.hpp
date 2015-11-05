@@ -27,7 +27,9 @@ public:
 
 private:
     //HAND GESTURE
-    int result;
+    char result;
+    char lastResult;    // for debounce
+
 
     //sensor_msgs::CvBridge bridge_;
     cv_bridge::CvImagePtr bridge;
