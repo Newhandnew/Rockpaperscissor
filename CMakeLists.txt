@@ -132,6 +132,7 @@ include_directories(
 
 ## Declare a C++ executable
 add_executable(rockpaperscissor_node src/rockpaperscissor_node.cpp src/main.cpp)
+add_executable(rockpaperscissor_main src/rockpaperscissor_node.cpp src/rockpaperscissorMain.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -141,6 +142,10 @@ add_executable(rockpaperscissor_node src/rockpaperscissor_node.cpp src/main.cpp)
 target_link_libraries(rockpaperscissor_node
   ${catkin_LIBRARIES}
  )
+target_link_libraries(rockpaperscissor_main
+  ${catkin_LIBRARIES}
+ )
+
 
 #############
 ## Install ##

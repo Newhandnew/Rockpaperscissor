@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="rockpaperscissor" type="rockpaperscissor_main" name="game" respawn="true" output="screen" />
+  
+  <include file="$(find rockpaperscissor)/launch/rockpaperscissor.launch" />
+  <node pkg="tts_ekho" type="tts_ekho_node" name="tts_ekho_node" respawn="true" args="--respawnable" />
+
+</launch>

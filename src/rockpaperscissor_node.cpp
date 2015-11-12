@@ -174,62 +174,8 @@ void rockpaperscissor_node::imageReceiveHandler(const sensor_msgs::ImageConstPtr
   msg.data = message;//ss.str();
   resultPublisher.publish(msg);
 
-
- //  int width = cv_matrix.cols; 
- //  int height = cv_matrix.rows;
-
-	// uchar* raw = cv_matrix.ptr<uchar>(0);
-	// Image scan_image(width, height, "Y800", raw, width * height);
-	// int n = scanner.scan(scan_image); 
-
- //  if (n < 0) {
- //   	ROS_ERROR("Error occured while finding barcode");
- //   	return;
- //  }
-
- //  // extract results
- //  for(SymbolIterator symbol = scan_image.symbol_begin();
- //            symbol != scan_image.symbol_end();
- //            ++symbol) {
- //    std::stringstream ss;
- //  	//Publish msg on zbar topic 
-	//   ss << symbol->get_data();
- //    msg.header.seq = message_sequence++;
- //    msg.header.stamp = ros::Time::now();
- //    msg.header.frame_id = image->header.frame_id;
-	//   msg.data = ss.str();
-
- //    int x1 = width, y1 = height, x2 = 0, y2 = 0;
-
- //    for (int i = 0; i < symbol->get_location_size(); i++) {
- //      x1 = MIN(x1, symbol->get_location_x(i));
- //      y1 = MIN(y1, symbol->get_location_y(i));
- //      x2 = MAX(x2, symbol->get_location_x(i));
- //      y2 = MAX(y2, symbol->get_location_y(i));
- //    }
-
- //    msg.center_x = (x1 + x2) / 2; 
- //    msg.center_y = (y1 + y2) / 2; 
- //    msg.width = (x2 - x1); 
- //    msg.height = (y2 + y1); 
-
- //    if(SHOW_CV_WINDOW) {
- //      cv::rectangle(cv_matrix, cv::Point(x1,y1), cv::Point(x2,y2), cv::Scalar(255), 2);
- //    }
-
-	//   code.publish(msg);
- //  }
-
- //  //Show image in CV window
- //  if(SHOW_CV_WINDOW) {
- //  //frame = new IplImage(bridge->image);
-   	cv::imshow("rockpaperscissor", cvMatrix);
-    cv::waitKey(1);
- //  	cv::waitKey(1);
-	// //cvReleaseImage
- //  }
-
- // bridge.release();
+ 	cv::imshow("rockpaperscissor", cvMatrix);
+  cv::waitKey(1);
 }
 
 
